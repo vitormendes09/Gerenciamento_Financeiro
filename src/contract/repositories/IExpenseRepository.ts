@@ -1,0 +1,16 @@
+export interface IExpenseRepositoryFind<T>{
+    findById(id: number): Promise<T | null>;
+    findAll(): Promise<T[]>;
+}
+
+export interface IExpenseRepositoryInsert<T>{
+    insert(id:  number, user: T): Promise<void>;
+}
+
+export interface IExpenseRepositoryUpdate<T>{
+    update(id: number, user: T): Promise<T | null>;
+}  
+
+export interface IExpenseRepositoryDelete{
+    delete(id: number): Promise<boolean>;
+}

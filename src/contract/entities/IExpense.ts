@@ -1,9 +1,10 @@
 import { IUser } from "../entities/IUser";
 
 export interface IExpense {
-    id: number;
+    id?: number;
     user: IUser;
     description: string;
     amount: number;
     date: Date;
+    category: string
 }
