@@ -1,6 +1,7 @@
 export interface IExpenseRepositoryFind<T>{
     findById(id: number): Promise<T | null>;
     findAll(): Promise<T[]>;
+    findByCategory(category: string): Promise<T[]>;
 }
 
 export interface IExpenseRepositoryInsert<T>{
@@ -14,3 +15,5 @@ export interface IExpenseRepositoryUpdate<T>{
 export interface IExpenseRepositoryDelete{
     delete(id: number): Promise<boolean>;
 }
+
+

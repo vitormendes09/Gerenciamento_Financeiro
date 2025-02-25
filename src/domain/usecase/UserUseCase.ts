@@ -1,5 +1,10 @@
 import { IUserRepositoryFind, IUserRepositoryDelete, IUserRepositoryInsert, IUserRepositoryUpdate } from "../../contract/repositories/IUserRepository";
 import { IUser } from "../../contract/entities/IUser";
+import { AuthService } from "../Auth/AuthService";
+import bcrypt from 'bcryptjs';
+import { IUserUseCase} from "../../contract/usecase/IUserUseCase";
+
+
 
 interface UserInput {
     name: string;
@@ -11,9 +16,10 @@ interface UserOutput {
     success: boolean;
     message: string;
     user?: IUser;
+    token?: string;
 }
 
-export class UserUseCase{
+export class UserUseCase implements IUserUseCase {
     private userRepositoryFind: IUserRepositoryFind<IUser>;
     private userRepositoryDelete: IUserRepositoryDelete;
     private userRepositoryInsert: IUserRepositoryInsert<IUser>;
@@ -26,7 +32,8 @@ export class UserUseCase{
         this.userRepositoryUpdate = userRepositoryUpdate;
     }
 
-    async perform(input: UserInput): Promise<UserOutput> {
+    /** 📝 Método para cadastrar um novo usuário */
+    async register(input: UserInput): Promise<UserOutput> {
         const { name, email, password } = input;
 
         // Verificar se todos os dados foram fornecidos
@@ -50,8 +57,11 @@ export class UserUseCase{
             return { success: false, message: "E-mail já cadastrado." };
         }
 
+        // Criptografar a senha
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         // Criar novo usuário
-        const newUser: IUser = { name, email, password };
+        const newUser: IUser = { name, email, password: hashedPassword };
         const id = Date.now(); 
         await this.userRepositoryInsert.insert(id, newUser);
         const savedUser = { id, ...newUser };
@@ -63,5 +73,48 @@ export class UserUseCase{
         };
     }
 
+    /** 🔑 Método para realizar login e gerar um JWT */
+    async login(email: string, password: string): Promise<UserOutput> {
+        // Buscar usuário pelo e-mail
+        const user: IUser | null = await this.userRepositoryFind.findByEmail(email) as IUser | null;
+
+        if (!user) {
+            return { success: false, message: "E-mail ou senha inválidos." };
+        }
+
+        // Comparar a senha digitada com a armazenada
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return { success: false, message: "E-mail ou senha inválidos." };
+        }
+
+        // Gerar o token JWT
+        const token = AuthService.generateToken(user);
+
+        return {
+            success: true,
+            message: "Login realizado com sucesso!",
+            user,
+            token
+        };
+    }
+
+    async getUserById(id: number): Promise<UserOutput> {
+        // Verificar se o ID é válido (simulação de validação de ID)
+        if (!id) {
+            return { success: false, message: "ID do usuário é necessário." };
+        }
+
+        const user = await this.userRepositoryFind.findById(id);
+        if (!user) {
+            return { success: false, message: "Usuário não encontrado." };
+        }
+
+        return {
+            success: true,
+            message: "Usuário encontrado com sucesso!",
+            user
+        };
+    }
 
 }

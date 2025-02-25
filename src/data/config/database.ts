@@ -4,18 +4,18 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASSWORD;
+const dbPassword = process.env.DB_PASS;
 
 const connectDB = async () => {
   try {
     await mongoose.connect(
-      `mongodb://${dbUser}:${dbPassword}@localhost:27017/expense-tracker`, {
+       `mongodb+srv://${dbUser}:${dbPassword}@cluster0.uf8gc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`, {
       useUnifiedTopology: true,
-   
+        useNewUrlParser: true,
     } as ConnectOptions);
     console.log('MongoDB connected');
   } catch (err) {
-    console.error('Erro ao conectar o banco',err);
+    console.error('Erro ao conectar ao Banco',err);
     process.exit(1);
   }
 };

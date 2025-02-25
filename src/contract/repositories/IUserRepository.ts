@@ -1,7 +1,6 @@
 export interface IUserRepositoryFind<T>{
     findByEmail(email: string): unknown;
     findById(id: number): Promise<T | null>;
-    findAll(): Promise<T[]>;
 }
 
 export interface IUserRepositoryInsert<T>{

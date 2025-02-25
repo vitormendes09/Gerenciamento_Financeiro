@@ -1,5 +1,4 @@
 import {IUser} from '../../contract/entities/IUser'
-
 import {Model} from 'mongoose';
 import { IUserRepositoryInsert, IUserRepositoryFind, IUserRepositoryUpdate, IUserRepositoryDelete } from '../../contract/repositories/IUserRepository';
 
@@ -15,14 +14,16 @@ export class UserRepository implements IUserRepositoryInsert<IUser> {
 }
 
 export class UserRepositoryFind implements IUserRepositoryFind<IUser> {
-    constructor(private userModel: Model<IUser>){}
+    constructor(private userModel: Model<IUser>){
+        userModel: Model<IUser>
+
+    }
+    findByEmail(email: string): unknown {
+        return this.userModel.findOne({ email }).exec();
+    }
 
     findById(id: number): Promise<IUser | null> {
         return this.userModel.findById(id).exec();
-    }
-
-    findAll(): Promise<IUser[]> {
-        return this.userModel.find().exec();
     }
 }
 

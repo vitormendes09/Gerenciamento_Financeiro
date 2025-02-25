@@ -1,17 +1,17 @@
-import express from 'express'
+import express from 'express';
 
-import {router} from 
+import createRoutes from '../src/infra/routes/routes';
 
-app.use(express.json())
+async function startServer() {
+    const app = express();
+    app.use(express.json());
 
-app.use(router)
+    const router = await createRoutes(); 
+    app.use(router); 
 
-const dbUser = process.env.DB_USER
-const dbPassword = process.env.DB_PASSWORD
+    app.listen(3000, () => {
+        console.log(" Servidor rodando na porta 3000");
+    });
+}
 
-mongoose
-.connect('mongodb://localhost:27017/expense-tracker')
-    .then(() => {
-        app.listen(3000, () => console.log('Server is running on port 3000'))
-        console.log('Connected to MongoDB')})
-    .catch((err: any) => console.error(err))
+startServer();

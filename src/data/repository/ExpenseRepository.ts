@@ -23,6 +23,13 @@ export class ExpenseRepositoryFind implements IExpenseRepositoryFind<IExpense> {
     findAll(): Promise<IExpense[]> {
         return this.expenseModel.find().exec();
     }
+
+    findByCategory(category: string): Promise<IExpense[]> {
+        return this.expenseModel.find
+        ({
+            category: category
+        }).exec();
+    }
 }
 
 export class ExpenseRepositoryUpdate implements IExpenseRepositoryUpdate<IExpense> {
