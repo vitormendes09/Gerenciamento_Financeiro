@@ -9,8 +9,6 @@ export class ExpenseController implements IExpenseController{
     private expenseUseCase: IExpenseUseCase;
     private expenseRepositoryFind: IExpenseRepositoryFind<IExpense>;
 
-    
-
     constructor(expenseUseCase: IExpenseUseCase, expenseRepositoryFind: IExpenseRepositoryFind<IExpense>){
         this.expenseRepositoryFind = expenseRepositoryFind;
         this.expenseUseCase = expenseUseCase;

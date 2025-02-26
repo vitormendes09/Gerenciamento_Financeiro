@@ -12,7 +12,7 @@ export interface IExpenseRepositoryUpdate<T>{
     update(id: number, user: T): Promise<T | null>;
 }  
 
-export interface IExpenseRepositoryDelete{
+export interface IExpenseRepositoryDelete<T>{
     delete(id: number): Promise<boolean>;
 }
 

@@ -3,9 +3,12 @@ import {Model} from 'mongoose';
 import { IUserRepositoryInsert, IUserRepositoryFind, IUserRepositoryUpdate, IUserRepositoryDelete } from '../../contract/repositories/IUserRepository';
 
 
-export class UserRepository implements IUserRepositoryInsert<IUser> {
+export class UserRepositoryInsert implements IUserRepositoryInsert<IUser> {
     constructor(private userModel: Model<IUser>){
          userModel: Model<IUser>
+    }
+    findByEmail(email: string): unknown {
+        throw new Error('Method not implemented.');
     }
 
     insert(id: number, user: IUser): Promise<void> {

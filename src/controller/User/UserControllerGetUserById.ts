@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { IUserUseCase } from "../../contract/usecase/IUserUseCase";
+import { IUserUseCaseGetUserById } from "../../contract/usecase/IUserUseCase";
 import { z } from "zod";
 import { IUserControllerGetUserById } from "../../contract/controllers/IUserController";
 
 export class UserControllerGetUserById implements IUserControllerGetUserById {
-    private userUseCase: IUserUseCase;
+    private userUseCase: IUserUseCaseGetUserById;
 
-    constructor(userUseCase: IUserUseCase) {
+    constructor(userUseCase: IUserUseCaseGetUserById) {
         this.userUseCase = userUseCase;
     }
 

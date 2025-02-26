@@ -3,7 +3,7 @@ import { Model } from "mongoose";
 import { IExpenseRepositoryInsert, IExpenseRepositoryFind, IExpenseRepositoryUpdate, IExpenseRepositoryDelete } from "../../contract/repositories/IExpenseRepository";
 
 
-export class ExpenseRepository implements IExpenseRepositoryInsert<IExpense> {
+export class ExpenseRepositoryCreate implements IExpenseRepositoryInsert<IExpense> {
     constructor(private expenseModel: Model<IExpense>){
          expenseModel: Model<IExpense>
     }

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { IUserUseCase } from "../../contract/usecase/IUserUseCase";
+import { IUserUseCaseRegister } from "../../contract/usecase/IUserUseCase";
 
 import {z} from "zod";
 import { IUserController , IUserControllerRegister } from "../../contract/controllers/IUserController";
@@ -8,9 +8,9 @@ import { IUserController , IUserControllerRegister } from "../../contract/contro
 
 export class UserControllerRegister implements IUserControllerRegister{
 
-    private userUseCase: IUserUseCase;
+    private userUseCase: IUserUseCaseRegister;
 
-    constructor(userUseCase: IUserUseCase){
+    constructor(userUseCase: IUserUseCaseRegister){
         this.userUseCase = userUseCase;
     }
 

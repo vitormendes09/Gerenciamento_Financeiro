@@ -21,10 +21,6 @@ export interface IExpenseControllerGetExpensesByUser {
     getExpensesByUser(req: Request, res: Response): Promise<Response>;
 }
 
-export interface IExpenseControllerGetAllExpenses {
-    getAllExpenses(req: Request, res: Response): Promise<Response>;
-}
-
 export interface IExpenseControllerGetExpensesByCategory {
     getExpensesByCategory(req: Request, res: Response): Promise<Response>;
 }

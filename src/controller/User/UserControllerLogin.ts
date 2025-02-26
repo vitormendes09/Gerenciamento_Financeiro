@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { IUserUseCase } from "../../contract/usecase/IUserUseCase";
+import { IUserUseCaseLogin } from "../../contract/usecase/IUserUseCase";
 import { z } from "zod";
 import { IUserControllerLogin } from "../../contract/controllers/IUserController";
 
 export class UserControllerLogin implements IUserControllerLogin {
-    private userUseCase: IUserUseCase;
+    private userUseCase: IUserUseCaseLogin;
 
-    constructor(userUseCase: IUserUseCase) {
+    constructor(userUseCase: IUserUseCaseLogin) {
         this.userUseCase = userUseCase;
     }
     async login(req: Request, res: Response) {

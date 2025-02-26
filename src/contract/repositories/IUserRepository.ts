@@ -4,6 +4,7 @@ export interface IUserRepositoryFind<T>{
 }
 
 export interface IUserRepositoryInsert<T>{
+    findByEmail(email: string): unknown;
     insert(id:  number, user: T): Promise<void>;
 }
 
