@@ -33,7 +33,8 @@ async function createRoutes() {
     // Rotas de usuário
     router.get("/users/:id", async (req, res) => {
         try {
-            await userController.getUserById(req, res);
+            await userController
+            .getUserById(req, res);
         }
         catch (error) {
             res.status(500).json({ msg: "Erro ao buscar usuário" });
