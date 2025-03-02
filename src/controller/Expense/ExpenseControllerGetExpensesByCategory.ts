@@ -20,7 +20,13 @@ export class ExpenseControllerGetExpensesByCategory implements IExpenseControlle
             if(!category || !userId){
                 return res.status(400).json({ message: "Categoria e ID do usuário são obrigatórios." });
             }
+            
             const expenses = await this.expenseUseCase.getExpensesByCategory(userId, category);
+
+            if (expenses.length === 0) {
+                return res.status(404).json({ message: "Nenhuma despesa encontrada para essa categoria e usuário." });
+            }
+
             return res.status(200).json({ expenses });
         } catch (err) {
             return res.status(500).json({

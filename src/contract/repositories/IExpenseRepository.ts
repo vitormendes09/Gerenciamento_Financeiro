@@ -1,7 +1,7 @@
 export interface IExpenseRepositoryFind<T>{
     findById(id: string): Promise<T | null>;
     findAll(): Promise<T[]>;
-    findByCategory(category: string): Promise<T[]>;
+    findByCategory(category: string, userId: string): Promise<T[]>;
     findByUserId(userId: string): Promise<T[]>;
 }
 

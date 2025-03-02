@@ -1,5 +1,5 @@
 import { IExpense} from "../../contract/entities/IExpense";
-import { Model } from "mongoose";
+import mongoose, { Model } from "mongoose";
 import { IExpenseRepositoryInsert, IExpenseRepositoryFind, IExpenseRepositoryDelete  } from "../../contract/repositories/IExpenseRepository";
 import { IExpenseControllerDeleteExpense } from "../../contract/controllers/IExpenseController";
 import { Request, Response } from "express";
@@ -26,16 +26,13 @@ export class ExpenseRepositoryFind implements IExpenseRepositoryFind<IExpense> {
         return this.expenseModel.find().exec();
     }
 
-    findByCategory(category: string): Promise<IExpense[]> {
-        return this.expenseModel.find
-        ({
-            category: category
-        }).exec();
+    findByCategory(userId: string,category: string): Promise<IExpense[]> {
+        return this.expenseModel.find({ category: category, iduser:userId }).exec();
     }
 
 
     findByUserId(userId: string): Promise<IExpense[]> {
-        return this.expenseModel.find({ iduser: userId }).exec();
+        return this.expenseModel.find({ iduser: new mongoose.Types.ObjectId(userId) }).exec();
     }
     
     

@@ -31,24 +31,24 @@ POST http://localhost:3000/expenses
 Content-Type: application/json
 
 {
-  "userId": "67c329b892b69f559c08a106",
-  "description": "Passagem",
-  "amount": 200,
+  "userId": "67c3910819b59ec6b6418f7a",
+  "description": "luz",
+  "amount": 150,
   "date": "2025-02-24T10:00:00Z",
-  "category": "Transporte"
+  "category": "casa"
 }
 
 
 ### Testando Buscar Despesa por ID (GET /expenses/:id)
 GET http://localhost:3000/expense/67c329b892b69f559c08a106
 
-### Testando Buscar Despesa por ID (GET /expenses/:id)
-GET http://localhost:3000/expenses/Transporte/67c329b892b69f559c08a106
+### Testando Buscar Despesa por ID (GET /expenses/category/:id)
+GET http://localhost:3000/expenses/casa/67c329b892b69f559c08a106
 
 
 
 ### Testando Exclusão de Despesa (DELETE /expenses/:id)
-DELETE http://localhost:3000/expenses/1
+DELETE http://localhost:3000/expenses/67c3c91942acdba69a4255d3
 
 
 #
