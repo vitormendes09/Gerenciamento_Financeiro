@@ -13,11 +13,7 @@ export interface UserOutput {
     token?: string;
 }
 
-export interface IUserUseCase {
-    register(input: UserInput): Promise<UserOutput>;
-    login(email: string, password: string): Promise<UserOutput>;
-    getUserById(id: number): Promise<UserOutput>;
-}
+
 
 export interface IUserUseCaseRegister {
     register(input: UserInput): Promise<UserOutput>;
@@ -28,5 +24,5 @@ export interface IUserUseCaseLogin {
 }
 
 export interface IUserUseCaseGetUserById {
-    getUserById(id: number): Promise<UserOutput>;
+    getUserById(id: string): Promise<UserOutput>;
 }

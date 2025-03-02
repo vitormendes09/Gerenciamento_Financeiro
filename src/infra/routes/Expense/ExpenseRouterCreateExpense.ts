@@ -15,6 +15,7 @@ async function ExpenseRouterCreateExpense(){
         }
     });
 
+    return router;  
 }
 
 export default ExpenseRouterCreateExpense;

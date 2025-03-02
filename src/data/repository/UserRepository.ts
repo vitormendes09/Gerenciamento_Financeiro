@@ -7,11 +7,11 @@ export class UserRepositoryInsert implements IUserRepositoryInsert<IUser> {
     constructor(private userModel: Model<IUser>){
          userModel: Model<IUser>
     }
-    findByEmail(email: string): unknown {
-        throw new Error('Method not implemented.');
+    findByEmail(email: string): Promise<IUser | null>  {
+        return this.userModel.findOne({ email }).exec();
     }
 
-    insert(id: number, user: IUser): Promise<void> {
+    insert(id: string, user: IUser): Promise<void> {
        return this.userModel.create(user).then(() => {});
     }
 }
@@ -25,7 +25,7 @@ export class UserRepositoryFind implements IUserRepositoryFind<IUser> {
         return this.userModel.findOne({ email }).exec();
     }
 
-    findById(id: number): Promise<IUser | null> {
+    findById(id: string): Promise<IUser | null> {
         return this.userModel.findById(id).exec();
     }
 }
@@ -41,7 +41,7 @@ export class UserRepositoryUpdate implements IUserRepositoryUpdate<IUser> {
 export class UserRepositoryDelete implements IUserRepositoryDelete {
     constructor(private userModel: Model<IUser>){}
 
-    delete(id: number): Promise<boolean> {
+    delete(id: string): Promise<boolean> {
         return this.userModel.findByIdAndDelete(id).exec().then(() => true);
     }
 }

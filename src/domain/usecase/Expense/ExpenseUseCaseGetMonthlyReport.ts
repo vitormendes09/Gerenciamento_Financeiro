@@ -16,7 +16,7 @@ export class ExpenseUseCaseGetMonthlyReport implements IExpenseUseCaseGetMonthly
        return expenses.filter(expense => {
         const expenseData = new Date(expense.date);
         return (
-            expense.user.id === Number(userId) &&
+            expense.iduser &&
             expenseData.getMonth() + 1 === month &&
             expenseData.getFullYear() === year
         );

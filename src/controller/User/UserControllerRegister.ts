@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { IUserUseCaseRegister } from "../../contract/usecase/IUserUseCase";
 
 import {z} from "zod";
-import { IUserController , IUserControllerRegister } from "../../contract/controllers/IUserController";
+import {  IUserControllerRegister } from "../../contract/controllers/IUserController";
 
 
 export class UserControllerRegister implements IUserControllerRegister{
@@ -32,6 +32,9 @@ export class UserControllerRegister implements IUserControllerRegister{
             }
             return res.status(201).json({message: result.message});
         } catch(err){
+            
+            console.error("Erro ao registrar usuário:", err);
+
             if(err instanceof z.ZodError){
                 return res.status(400).json({message: "Erro de validação", errors: err.errors});
             }

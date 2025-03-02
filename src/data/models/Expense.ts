@@ -1,11 +1,11 @@
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, Schema, Types  } from "mongoose";
 
 import { IExpense } from "../../contract/entities/IExpense";
 
 
 
 const ExpenseSchema = new mongoose.Schema<IExpense>({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  iduser: { type: Schema.Types.ObjectId, ref: "User", required: true },
   description: { type: String, required: true },
   amount: { type: Number, required: true },
   date: { type: Date, default: Date.now },

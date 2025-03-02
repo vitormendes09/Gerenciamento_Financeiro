@@ -7,7 +7,6 @@ import { ExpenseRepositoryFind } from "../../../data/repository/ExpenseRepositor
 import { IExpense } from "../../../contract/entities/IExpense";
 import { Expense } from "../../../data/models/Expense";
 import connectDB from "../../../data/config/database";
-import { UserRepositoryFind } from "../../../data/repository/UserRepository";
 
 export async function ExpenseFactoryExpenseByUser() {
     await connectDB();
@@ -17,4 +16,4 @@ export async function ExpenseFactoryExpenseByUser() {
 
     return expenseController;
 
-}
+} 

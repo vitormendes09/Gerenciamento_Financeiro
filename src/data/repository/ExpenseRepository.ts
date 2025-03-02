@@ -1,6 +1,8 @@
 import { IExpense} from "../../contract/entities/IExpense";
 import { Model } from "mongoose";
-import { IExpenseRepositoryInsert, IExpenseRepositoryFind, IExpenseRepositoryUpdate, IExpenseRepositoryDelete } from "../../contract/repositories/IExpenseRepository";
+import { IExpenseRepositoryInsert, IExpenseRepositoryFind, IExpenseRepositoryDelete  } from "../../contract/repositories/IExpenseRepository";
+import { IExpenseControllerDeleteExpense } from "../../contract/controllers/IExpenseController";
+import { Request, Response } from "express";
 
 
 export class ExpenseRepositoryCreate implements IExpenseRepositoryInsert<IExpense> {
@@ -8,7 +10,7 @@ export class ExpenseRepositoryCreate implements IExpenseRepositoryInsert<IExpens
          expenseModel: Model<IExpense>
     }
 
-    async insert(id: number, expense: IExpense): Promise<void> {
+    async insert(id: string, expense: IExpense): Promise<void> {
        await this.expenseModel.create(expense);
     }
 }
@@ -16,7 +18,7 @@ export class ExpenseRepositoryCreate implements IExpenseRepositoryInsert<IExpens
 export class ExpenseRepositoryFind implements IExpenseRepositoryFind<IExpense> {
     constructor(private expenseModel: Model<IExpense>){}
 
-    findById(id: number): Promise<IExpense | null> {
+    findById(id: string): Promise<IExpense | null> {
         return this.expenseModel.findById(id).exec();
     }
 
@@ -30,20 +32,26 @@ export class ExpenseRepositoryFind implements IExpenseRepositoryFind<IExpense> {
             category: category
         }).exec();
     }
-}
 
-export class ExpenseRepositoryUpdate implements IExpenseRepositoryUpdate<IExpense> {
-    constructor(private expenseModel: Model<IExpense>){}
 
-    update(id: number, expense: IExpense): Promise<IExpense | null> {
-        return this.expenseModel.findByIdAndUpdate(id, expense).exec();
+    findByUserId(userId: string): Promise<IExpense[]> {
+        return this.expenseModel.find({ iduser: userId }).exec();
     }
+    
+    
 }
 
-export class ExpenseRepositoryDelete implements IExpenseRepositoryDelete {
+export class ExpenseRepositoryDelete implements IExpenseRepositoryDelete<IExpense>{
     constructor(private expenseModel: Model<IExpense>){}
-
-    delete(id: number): Promise<boolean> {
+    delete(id: string): unknown {
         return this.expenseModel.findByIdAndDelete(id).exec().then(() => true);
     }
+    findById(id: string): Promise<boolean> {
+        return this.expenseModel.findById(id).exec().then(doc => !!doc);
+    }
+   
+
 }
+
+
+

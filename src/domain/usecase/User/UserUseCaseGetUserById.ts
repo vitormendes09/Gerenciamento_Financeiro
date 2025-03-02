@@ -8,7 +8,7 @@ export class UserUseCaseGetUserById implements IUserUseCaseGetUserById {
         this.userRepositoryFind = userRepositoryFind;
     }
 
-    async getUserById(id: number): Promise<UserOutput> {
+    async getUserById(id: string): Promise<UserOutput> {
         if (!id) {
             return {
                 success: false,

@@ -9,10 +9,8 @@ const dbPassword = process.env.DB_PASS;
 const connectDB = async () => {
   try {
     await mongoose.connect(
-       `mongodb+srv://${dbUser}:${dbPassword}@cluster0.uf8gc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`, {
-      useUnifiedTopology: true,
-        useNewUrlParser: true,
-    } as ConnectOptions);
+       `mongodb+srv://${dbUser}:${dbPassword}@cluster0.uf8gc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+      );
     console.log('MongoDB connected');
   } catch (err) {
     console.error('Erro ao conectar ao Banco',err);

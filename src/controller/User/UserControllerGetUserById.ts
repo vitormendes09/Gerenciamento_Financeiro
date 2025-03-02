@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { IUserUseCaseGetUserById } from "../../contract/usecase/IUserUseCase";
-import { z } from "zod";
 import { IUserControllerGetUserById } from "../../contract/controllers/IUserController";
 
 export class UserControllerGetUserById implements IUserControllerGetUserById {
@@ -12,7 +11,7 @@ export class UserControllerGetUserById implements IUserControllerGetUserById {
 
     async getUserById(req: Request, res: Response): Promise<Response> {
         try {
-            const id = parseInt(req.params.id, 10);
+            const id = req.params.id;
             const user = await this.userUseCase.getUserById(id);
 
             if (!user) {

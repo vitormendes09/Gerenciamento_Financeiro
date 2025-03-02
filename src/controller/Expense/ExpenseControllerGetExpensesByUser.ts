@@ -13,9 +13,11 @@ export class ExpenseControllerGetExpensesByUser implements IExpenseControllerGet
         this.expenseRepositoryFind = expenseRepositoryFind;
     }
 
-    async getExpensesByUser(req: Request, res: Response): Promise<Response> {
+    async getExpensesByUser(userId:string, res:Response): Promise<Response> {
         try {
-            const { userId } = req.params;
+            if (!userId) {
+                return res.status(400).json({ message: "O ID do usuário é obrigatório." });
+            }
             const expenses = await this.expenseUseCase.getExpensesByUser(userId);
            if(!expenses){
                return res.status(404).json({message: "Nenhuma despesa encontrada."});
@@ -29,4 +31,4 @@ export class ExpenseControllerGetExpensesByUser implements IExpenseControllerGet
         }
 
     }
-}
+} 

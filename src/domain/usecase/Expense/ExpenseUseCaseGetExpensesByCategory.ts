@@ -13,7 +13,7 @@ export class ExpenseUseCaseGetExpensesByCategory implements IExpenseUseCaseGetEx
     }
     async getExpensesByCategory(userId: string, category: string): Promise<IExpense[]> {
         const expense = await this.expenseRepositoryFind.findAll();
-        const filteredExpenses = expense.filter(expense => String(expense.user.id) === userId && expense.category === category);
+        const filteredExpenses = expense.filter(expense => expense.iduser === userId && expense.category === category);
         return filteredExpenses;
     }
 

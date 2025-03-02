@@ -13,7 +13,7 @@ export class ExpenseUseCaseDeleteExpense implements IExpenseUseCaseDeleteExpense
     }
     async deleteExpense(userId: string, expenseId: string): Promise<ExpenseOutput> {
         const expenses = await this.expenseRepositoryFind.findAll();
-        const expense = expenses.find(expense => expense.user.id === Number(userId) && expense.id === Number(expenseId));
+        const expense = expenses.find(expense => expense.iduser  && expense.id );
 
         if(!expense){
             return Promise.resolve({ success: false, message: "Despesa não encontrada." });

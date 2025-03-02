@@ -16,8 +16,10 @@ export class ExpenseControllerGetExpensesByCategory implements IExpenseControlle
 
     async getExpensesByCategory(req: Request, res: Response): Promise<Response> {
         try {
-            const { category } = req.params;
-            const { userId } = req.params;
+            const { category, userId } = req.params;
+            if(!category || !userId){
+                return res.status(400).json({ message: "Categoria e ID do usuário são obrigatórios." });
+            }
             const expenses = await this.expenseUseCase.getExpensesByCategory(userId, category);
             return res.status(200).json({ expenses });
         } catch (err) {

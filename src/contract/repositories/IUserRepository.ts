@@ -1,11 +1,11 @@
 export interface IUserRepositoryFind<T>{
     findByEmail(email: string): unknown;
-    findById(id: number): Promise<T | null>;
+    findById(id: string): Promise<T | null>;
 }
 
 export interface IUserRepositoryInsert<T>{
     findByEmail(email: string): unknown;
-    insert(id:  number, user: T): Promise<void>;
+    insert(id:  string, user: T): Promise<void>;
 }
 
 export interface IUserRepositoryUpdate<T>{
@@ -13,5 +13,5 @@ export interface IUserRepositoryUpdate<T>{
 }  
 
 export interface IUserRepositoryDelete{
-    delete(id: number): Promise<boolean>;
+    delete(id: string): Promise<boolean>;
 }

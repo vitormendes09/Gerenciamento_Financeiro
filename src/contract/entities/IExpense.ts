@@ -1,10 +1,12 @@
-import { IUser } from "../entities/IUser";
+import { Types } from "mongoose";
+
 
 export interface IExpense {
-    id?: number;
-    user: IUser;
+    id?: string;
+    iduser: Types.ObjectId | string;
     description: string;
     amount: number;
     date: Date;
     category: string
+    status: boolean;
 }

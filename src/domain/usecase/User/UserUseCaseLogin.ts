@@ -30,7 +30,7 @@ export class UserUseCaseLogin implements IUserUseCaseLogin {
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
-        if (user.password !== password) {
+        if (!isPasswordValid) {
             return {
                 success: false,
                 message: "Password is incorrect"

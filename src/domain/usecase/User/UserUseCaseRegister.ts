@@ -31,7 +31,7 @@ export class UserUseCaseRegister implements IUserUseCaseRegister {
         }
 
         // Verificar se o e-mail já está cadastrado
-
+        console.log("Verificando e-mail:", email);
         const existingUser = await this.userRepositoryInsert.findByEmail(email);
 
         if (existingUser) {
@@ -42,8 +42,9 @@ export class UserUseCaseRegister implements IUserUseCaseRegister {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser: IUser = { name, email, password: hashedPassword };
-        const id = Date.now();
+        const id = Date.now().toString();
         await this.userRepositoryInsert.insert(id, newUser);
+        console.log("Salvando usuário no banco:", newUser);
         const savedUser = { id, ...newUser };
 
         // Gerar token
