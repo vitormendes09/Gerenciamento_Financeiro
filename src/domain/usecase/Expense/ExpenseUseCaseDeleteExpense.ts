@@ -11,19 +11,15 @@ export class ExpenseUseCaseDeleteExpense implements IExpenseUseCaseDeleteExpense
         this.expenseRepositoryDelete = expenseRepositoryDelete;
         this.expenseRepositoryFind = expenseRepositoryFind;
     }
-    async deleteExpense(userId: string, expenseId: string): Promise<ExpenseOutput> {
-        const expenses = await this.expenseRepositoryFind.findAll();
-        const expense = expenses.find(expense => expense.iduser  && expense.id );
+    async deleteExpense( expenseId: string): Promise<ExpenseOutput> {
+        const expense = await this.expenseRepositoryFind.findById(expenseId);
+       
 
         if(!expense){
             return Promise.resolve({ success: false, message: "Despesa não encontrada." });
         }
 
-        if (expense.id !== undefined) {
-            await this.expenseRepositoryDelete.delete(expense.id);
-        } else {
-            return Promise.resolve({ success: false, message: "ID da despesa é indefinido." });
-        }
+        await this.expenseRepositoryDelete.delete(expenseId);
 
         return {
             success: true,

@@ -16,8 +16,8 @@ export class ExpenseControllerDeleteExpense implements IExpenseControllerDeleteE
 
     async deleteExpense(req: Request, res: Response): Promise<Response> {
         try{
-            const {userId, expenseId} = req.params;
-            const expense = await this.expenseUseCase.deleteExpense(userId, expenseId, false);
+            const {id} = req.params;
+            const expense = await this.expenseUseCase.deleteExpense(id);
             if(!expense.success){
                 return Promise.resolve(res.status(400).json({message: expense.message}));
             }   

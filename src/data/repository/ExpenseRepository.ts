@@ -17,6 +17,15 @@ export class ExpenseRepositoryCreate implements IExpenseRepositoryInsert<IExpens
 
 export class ExpenseRepositoryFind implements IExpenseRepositoryFind<IExpense> {
     constructor(private expenseModel: Model<IExpense>){}
+    async findByUserAndDate(userId: string, month: number, year: number): Promise<IExpense[]> {
+        return this.expenseModel.find({
+            iduser: userId,
+            date: {
+                $gte: new Date(year, month - 1, 1), // Primeiro dia do mês
+                $lt: new Date(year, month, 1) // Primeiro dia do próximo mês
+            }
+        }).exec();
+    }
 
     findById(id: string): Promise<IExpense | null> {
         return this.expenseModel.findById(id).exec();
@@ -41,7 +50,7 @@ export class ExpenseRepositoryFind implements IExpenseRepositoryFind<IExpense> {
 export class ExpenseRepositoryDelete implements IExpenseRepositoryDelete<IExpense>{
     constructor(private expenseModel: Model<IExpense>){}
     delete(id: string): unknown {
-        return this.expenseModel.findByIdAndDelete(id).exec().then(() => true);
+        return this.expenseModel.findByIdAndDelete(id).exec();
     }
     findById(id: string): Promise<boolean> {
         return this.expenseModel.findById(id).exec().then(doc => !!doc);

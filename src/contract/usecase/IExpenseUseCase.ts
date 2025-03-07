@@ -20,7 +20,7 @@ export interface IExpenseUseCaseCreateExpense {
 }
 
 export interface IExpenseUseCaseDeleteExpense {
-    deleteExpense(userId: string, expenseId: string, status: boolean): Promise<ExpenseOutput>;
+    deleteExpense(expenseId: string): Promise<ExpenseOutput>;
 }
 
 export interface IExpenseUseCaseGetExpensesByUser {
