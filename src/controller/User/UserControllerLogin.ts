@@ -13,7 +13,7 @@ export class UserControllerLogin implements IUserControllerLogin {
         try {
             const schema = z.object({
                 email: z.string().email("E-mail inválido."),
-                password: z.string().min(5, "A senha deve ter no mínimo 5 caracteres.")
+                password: z.string()
             });
 
             const { email, password } = schema.parse(req.body);

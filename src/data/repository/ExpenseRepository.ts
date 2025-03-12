@@ -55,8 +55,6 @@ export class ExpenseRepositoryDelete implements IExpenseRepositoryDelete<IExpens
     findById(id: string): Promise<boolean> {
         return this.expenseModel.findById(id).exec().then(doc => !!doc);
     }
-   
-
 }
 
 

@@ -29,8 +29,11 @@ export class ExpenseControllerCreateExpense implements IExpenseControllerCreateE
             const savedExpense = await this.expenseUseCase.createExpense(newExpense);
 
             return res.status(201).json({ message: savedExpense.message });
-        } catch (err) {
-            return res.status(500).json({ message: "Erro ao criar despesa" });
+        } catch (err:any) {
+            if (err.message === "Erro ao criar despesa") {
+                return res.status(400).json({ message: err.message });
+            }
+            return res.status(500).json({ message: "Erro interno do servidor" });
         }
 
 

@@ -12,10 +12,10 @@ export class UserUseCaseLogin implements IUserUseCaseLogin {
     }
 
     async login(email: string, password: string): Promise<UserOutput> {
-        if (!email || !password) {
+       if (!password) {
             return {
                 success: false,
-                message: "Email and password are required"
+                message: "Password are required"
             }
         }
 
