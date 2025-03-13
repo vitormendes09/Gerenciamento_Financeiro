@@ -19,7 +19,7 @@ export class ExpenseControllerGetExpensesByUser implements IExpenseControllerGet
                 return res.status(400).json({ message: "O ID do usuário é obrigatório." });
             }
             const expenses = await this.expenseUseCase.getExpensesByUser(userId);
-           if(!expenses){
+           if(!expenses|| expenses.length === 0){
                return res.status(404).json({message: "Nenhuma despesa encontrada."});
            }
             return res.status(200).json({ expenses });
