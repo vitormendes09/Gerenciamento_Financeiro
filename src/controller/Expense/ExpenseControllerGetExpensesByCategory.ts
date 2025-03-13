@@ -30,8 +30,7 @@ export class ExpenseControllerGetExpensesByCategory implements IExpenseControlle
             return res.status(200).json({ expenses });
         } catch (err) {
             return res.status(500).json({
-                message: "Erro ao buscar despesas por categoria.", error:
-                    err
+                message: "Erro ao buscar despesas por categoria."
             });
         }
 
