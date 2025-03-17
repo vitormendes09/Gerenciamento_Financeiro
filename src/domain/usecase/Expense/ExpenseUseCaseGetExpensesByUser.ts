@@ -1,7 +1,5 @@
-import { Request, Response} from "express";
 import { IExpenseRepositoryFind } from "../../../contract/repositories/IExpenseRepository";
 import { IExpenseUseCaseGetExpensesByUser } from "../../../contract/usecase/IExpenseUseCase";
-import { IUser } from "../../../contract/entities/IUser";
 import { IExpense } from "../../../contract/entities/IExpense";
 
 export class ExpenseUseCaseGetExpensesByUser implements IExpenseUseCaseGetExpensesByUser{
@@ -12,10 +10,12 @@ export class ExpenseUseCaseGetExpensesByUser implements IExpenseUseCaseGetExpens
 
     
     async getExpensesByUser(userId: string): Promise<IExpense[]> {
+      if (!userId) {
+        throw new Error("UserId é obrigatório");
+      }
       const expenses = await this.expenseRepositoryFind.findByUserId(userId);
       if (!expenses) {
-        return []
-;
+        return [];
       }
       const userExpenses = expenses.filter(expense => String(expense.iduser) === userId);
         return userExpenses;
