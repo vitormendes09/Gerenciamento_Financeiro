@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  backend:
+    build: .
+    container_name: meu-backend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - minha-rede
+
+networks:
+  minha-rede:
+    driver: bridge
