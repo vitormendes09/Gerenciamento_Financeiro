@@ -9,7 +9,8 @@ import  UserRouterLogin from './infra/routes/User/UserRouterLogin';
 import UserRouterGetUserById from './infra/routes/User/UserRouterGetUserById';
 import UserRouterRegister from './infra/routes/User/UserRouterRegister';
 
-
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from "../swaggerConfig";
 
 async function startServer() {
 
@@ -35,6 +36,9 @@ async function startServer() {
     app.use(userRouterLogin);
     app.use(userRouterGetUserById);
     app.use(userRouterRegister);
+
+    // Rota da documentação
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
     app.listen(3000, () => {

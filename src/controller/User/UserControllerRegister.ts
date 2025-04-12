@@ -31,7 +31,7 @@ export class UserControllerRegister implements IUserControllerRegister{
                 return res.status(400).json({message: result.message});
             }
             return res.status(201).json({message: result.message});
-        } catch(err){
+        } catch(err: any){
             
            
 

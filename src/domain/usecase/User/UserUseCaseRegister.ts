@@ -4,6 +4,8 @@ import { IUser } from "../../../contract/entities/IUser";
 import bcrypt from "bcrypt";
 import { AuthService } from "../../Auth/AuthService";
 
+
+
 export class UserUseCaseRegister implements IUserUseCaseRegister {
 
     private userRepositoryInsert: IUserRepositoryInsert<IUser>;

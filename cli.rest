@@ -5,18 +5,18 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-  "name": "Adriano",
-  "email": "Adriano@gmail.com",
+  "name": "valério",
+  "email": "valerio@gmail.com",
   "password": "senha123",
   "confirmPassword": "senha123"
 }
 
 ### Testando Login de Usuário (POST /auth/login)
-GET http://localhost:3000/auth/login
+Post http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "lAdriano@gmail.com",
+  "email": "valerio@gmail.com",
   "password": "senha123"
 }
 
@@ -55,3 +55,8 @@ DELETE http://localhost:3000/expenses/667c3cdaa11fe1aa3567c650c
 GET http://localhost:3000/expenses/monthly/123/2/2024 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer SEU_TOKEN_AQUI
+
+
+### documntation
+
+GET http://localhost:3000/api-docs
