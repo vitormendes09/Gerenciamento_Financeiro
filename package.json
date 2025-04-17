@@ -5,6 +5,8 @@
   "main": "src/server.ts",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "buid":"tsc", 
+    "start": "node dist/server.js",
     "test": "jest"
   },
   "repository": {

@@ -10,9 +10,10 @@ import UserRouterGetUserById from './infra/routes/User/UserRouterGetUserById';
 import UserRouterRegister from './infra/routes/User/UserRouterRegister';
 
 import swaggerUi from 'swagger-ui-express';
-import { swaggerSpec } from "../swaggerConfig";
-
+import { swaggerSpec} from './swaggerConfig';
+ 
 async function startServer() {
+
 
     const expenseRouterCreateExpense =  await ExpenseRouterCreateExpense();
     const expenseRouterGetExpensesByCategory = await ExpenseRouterGetExpensesByCategory()
@@ -37,7 +38,7 @@ async function startServer() {
     app.use(userRouterGetUserById);
     app.use(userRouterRegister);
 
-    // Rota da documentação
+    
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
