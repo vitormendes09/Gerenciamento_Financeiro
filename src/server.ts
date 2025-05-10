@@ -8,7 +8,7 @@ import ExpenseRouterDeleteExpense from './infra/routes/Expense/ExpenseRouterDele
 import  UserRouterLogin from './infra/routes/User/UserRouterLogin';
 import UserRouterGetUserById from './infra/routes/User/UserRouterGetUserById';
 import UserRouterRegister from './infra/routes/User/UserRouterRegister';
-
+import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec} from './swaggerConfig';
  
@@ -25,6 +25,11 @@ async function startServer() {
     const userRouterRegister = await UserRouterRegister();
 
     const app = express();
+
+    app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+    }))
 
     app.use(express.json());
 

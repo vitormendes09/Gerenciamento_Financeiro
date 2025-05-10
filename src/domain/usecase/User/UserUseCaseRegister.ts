@@ -28,10 +28,7 @@ export class UserUseCaseRegister implements IUserUseCaseRegister {
         }
 
         // Verificar se a senha tem pelo menos 5 caracteres
-        if (password.length < 5) {
-            return { success: false, message: "Password must have at least 5 characters." };
-        }
-
+       
         // Verificar se o e-mail já está cadastrado
         console.log("Verificando e-mail:", email);
         const existingUser = await this.userRepositoryInsert.findByEmail(email);
